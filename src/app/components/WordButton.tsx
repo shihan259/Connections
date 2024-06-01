@@ -7,6 +7,7 @@ interface WordButtonProps {
   word: string;
   selectedWords: string[];
   setSelectedWords: (words: string[]) => void;
+  shake: boolean;
 }
 
 const WordButton: React.FC<WordButtonProps> = ({
@@ -14,6 +15,7 @@ const WordButton: React.FC<WordButtonProps> = ({
   word,
   selectedWords,
   setSelectedWords,
+  shake,
 }) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -23,7 +25,6 @@ const WordButton: React.FC<WordButtonProps> = ({
   }, [selectedWords, word]);
 
   const handleClick = () => {
-
     // Check if max number of words are selected already
     if (selectedWords.length >= 4 && !selectedWords.includes(word)) {
       return;
@@ -38,12 +39,15 @@ const WordButton: React.FC<WordButtonProps> = ({
   };
 
   return (
+   
     <button
-      className={`bg-${
-        isActive ? "wordButtonActive text-white" : "wordButton text-black"
-      } font-bold py-2 px-4 rounded h-[75px]`}
+      className={`
+    ${isActive ? "bg-wordButtonActive text-white" : "bg-wordButton text-black"}
+    ${shake && isActive ? "animate-shake" : ""}
+    font-bold py-2 px-4 rounded h-[75px]`}
       onClick={handleClick}
     >
+      
       {word.toUpperCase()}
     </button>
   );
