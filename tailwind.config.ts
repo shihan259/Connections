@@ -9,6 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        green: "#A0C35A",
+        blue: "#B0C4EF",
+        yellow: "#F9DF6D",
+        purple: "#BA81C5",
         wordButton: '#EFEFE6',
         wordButtonActive: '#5A594E',
       },
@@ -23,52 +27,15 @@ const config: Config = {
           '20%, 60%': { transform: 'translateX(-5px)' },
           '40%, 80%': { transform: 'translateX(5px)' },
         },
-        moveToFirst: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(calc(-100% * 3), calc(-100% * 3))' },
-        },
-        moveToSecond: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(calc(-100% * 3), calc(-100% * 2))' },
-        },
-        moveToThird: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(calc(-100% * 3), -100%)' },
-        },
-        moveToFourth: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(calc(-100% * 3), 0)' },
-        },
-        // Define reverse animations for buttons moving back to initial positions
-        moveToInitial: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(calc(100% * 3), calc(100% * 3))' },
-        },
-        moveToSecondInitial: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(calc(100% * 3), calc(100% * 2))' },
-        },
-        moveToThirdInitial: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(calc(100% * 3), 100%)' },
-        },
-        moveToFourthInitial: {
-          '0%': { transform: 'translate(0, 0)' },
-          '100%': { transform: 'translate(calc(100% * 3), 0)' },
+        popOut: {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.2)' },
+          '100%': { transform: 'scale(1)' },
         },
       },
       animation: {
         shake: 'shake 0.5s ease-in-out',
-        // Swapping animations
-        moveToFirst: 'moveToFirst 0.3s ease-in-out',
-        moveToSecond: 'moveToSecond 0.3s ease-in-out',
-        moveToThird: 'moveToThird 0.3s ease-in-out',
-        moveToFourth: 'moveToFourth 0.3s ease-in-out',
-        // Reverse animations
-        moveToInitial: 'moveToInitial 0.3s ease-in-out',
-        moveToSecondInitial: 'moveToSecondInitial 0.3s ease-in-out',
-        moveToThirdInitial: 'moveToThirdInitial 0.3s ease-in-out',
-        moveToFourthInitial: 'moveToFourthInitial 0.3s ease-in-out',
+        popOut: 'popOut 0.5s ease-in-out',
       },
     },
   },

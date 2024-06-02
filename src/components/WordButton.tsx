@@ -3,19 +3,19 @@
 import { useEffect, useState } from "react";
 
 interface WordButtonProps {
-  category: number;
   word: string;
   selectedWords: string[];
   setSelectedWords: (words: string[]) => void;
   shake: boolean;
+  popOut: boolean;
 }
 
 const WordButton: React.FC<WordButtonProps> = ({
-  category,
   word,
   selectedWords,
   setSelectedWords,
   shake,
+  popOut,
 }) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -39,15 +39,14 @@ const WordButton: React.FC<WordButtonProps> = ({
   };
 
   return (
-   
     <button
       className={`
     ${isActive ? "bg-wordButtonActive text-white" : "bg-wordButton text-black"}
     ${shake && isActive ? "animate-shake" : ""}
-    font-bold py-2 px-4 rounded h-[75px]`}
+    ${popOut && isActive ? "animate-popOut" : ""}
+    text-xl font-bold px-2 rounded w-auto h-[75px] overflow-hidden`}
       onClick={handleClick}
     >
-      
       {word.toUpperCase()}
     </button>
   );
