@@ -9,16 +9,16 @@ export const shuffle = (array: WordItem[]) => {
 // Find index of selected words in the word list in ascending order
 export const findWordIndexes = (
   wordList: WordItem[],
-  selectedWords: string[]
+  selectedWords: WordItem[]
 ) => {
   return selectedWords
-    .map((word) => wordList.findIndex((item) => item.word === word))
+    .map((selectedWord) => wordList.findIndex((item) => item.word === selectedWord.word))
     .sort((a, b) => a - b);
 };
 
 export const swapButtons = (
   currentWordList: WordItem[],
-  selectedWords: string[]
+  selectedWords: WordItem[]
 ) => {
   const swappedList = [...currentWordList];
 

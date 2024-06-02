@@ -6,10 +6,13 @@ import { AnswerItem, WordItem } from "@/interfaces/interfaces";
 import { shuffle, swapButtons } from "@/helpers/functions";
 import { answers, wordlist } from "@/data";
 import SolvedCategory from "@/components/SolvedCategory";
+import Modal from "@/components/Modal/Modal";
+import WinnerScreen from "@/components/Modal/WinnerScreen";
+import LoserScreen from "@/components/Modal/LoserScreen";
 
 export default function Home() {
   // Store selected words
-  const [selectedWords, setSelectedWords] = useState([] as string[]);
+  const [selectedWords, setSelectedWords] = useState([] as WordItem[]);
   // Store updated word list based
   const [currentWordList, setCurrentWordList] = useState(wordlist);
   // Store answers that are solved
@@ -17,7 +20,7 @@ export default function Home() {
   // Store mistakes made
   const [mistakes, setMistakes] = useState(0);
   // Store individual guesses, it is a nested string array
-  const guesses: string[][] = [];
+  const [guesses, setGuesses] = useState([] as WordItem[][]);
 
   // Animations
   // State to control shaking animation
@@ -40,10 +43,21 @@ export default function Home() {
 
   const handleSubmit = () => {
     // Handle duplicate guesses
-    const sortedGuess = selectedWords.sort().join(",");
+    const sortedGuess = selectedWords
+      .map((selectedWord) => selectedWord.word)
+      .sort()
+      .join(",");
     const guessed = guesses.some((existingGuess) => {
-      return existingGuess.sort().join(",") === sortedGuess;
+      return (
+        existingGuess
+          .map((guess) => guess.word)
+          .sort()
+          .join(",") === sortedGuess
+      );
     });
+
+    // Add the guess to the list of guesses
+    setGuesses((prevGuesses) => [...prevGuesses, selectedWords]);
     if (guessed) {
       // TODO: Show popup message for duplicate guesses
       return;
@@ -60,7 +74,6 @@ export default function Home() {
       // Move buttons to the next row
       const swappedList = swapButtons(currentWordList, selectedWords);
       // Set the new word list
-      // TODO: Remove items that are already guessed
       setCurrentWordList(swappedList);
       // Popout the selected buttons
       setPopOut(true);
@@ -77,11 +90,8 @@ export default function Home() {
       // Shake selected WordButtons
       setShake(true);
       setTimeout(() => setShake(false), 500); // Remove the shake class after the animation duration
-
       // Increment mistakes
       setMistakes(mistakes + 1);
-      // Add the wrong guess to the guesses list
-      guesses.push(selectedWords);
     }
   };
 
@@ -99,7 +109,7 @@ export default function Home() {
     return currentWordList.map((wordItem, index) => (
       <WordButton
         key={index}
-        word={wordItem.word}
+        wordItem={wordItem}
         setSelectedWords={setSelectedWords}
         selectedWords={selectedWords}
         shake={shake}
@@ -110,6 +120,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
+      {mistakes >= 4 && (
+        <Modal>
+          <LoserScreen />
+        </Modal>
+        // <Modal>
+        //   <WinnerScreen mistakes={mistakes} guesses={guesses} />
+        // </Modal>
+      )}
       <h1 className="text-3xl font-bold mb-3">Connections</h1>
       <div className="w-auto">
         {renderSolvedCategories()}

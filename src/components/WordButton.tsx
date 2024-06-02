@@ -1,17 +1,18 @@
 "use client";
 
+import { WordItem } from "@/interfaces/interfaces";
 import { useEffect, useState } from "react";
 
 interface WordButtonProps {
-  word: string;
-  selectedWords: string[];
-  setSelectedWords: (words: string[]) => void;
+  wordItem: WordItem;
+  selectedWords: WordItem[];
+  setSelectedWords: (words: WordItem[]) => void;
   shake: boolean;
   popOut: boolean;
 }
 
 const WordButton: React.FC<WordButtonProps> = ({
-  word,
+  wordItem,
   selectedWords,
   setSelectedWords,
   shake,
@@ -21,19 +22,19 @@ const WordButton: React.FC<WordButtonProps> = ({
 
   useEffect(() => {
     // Check if the word is selected
-    setIsActive(selectedWords.includes(word));
-  }, [selectedWords, word]);
+    setIsActive(selectedWords.some((selectedWord) => selectedWord.word === wordItem.word));
+  }, [selectedWords, wordItem]);
 
   const handleClick = () => {
     // Check if max number of words are selected already
-    if (selectedWords.length >= 4 && !selectedWords.includes(word)) {
+    if (selectedWords.length >= 4 && !selectedWords.some((selectedWord) => selectedWord.word === wordItem.word)) {
       return;
     }
 
     // Toggle selection state of the word
-    const updatedSelectedWords = selectedWords.includes(word)
-      ? selectedWords.filter((selectedWord) => selectedWord !== word)
-      : [...selectedWords, word];
+    const updatedSelectedWords = selectedWords.some((selectedWord) => selectedWord.word === wordItem.word)
+      ? selectedWords.filter((selectedWord) => selectedWord.word !== wordItem.word)
+      : [...selectedWords, wordItem];
 
     setSelectedWords(updatedSelectedWords);
   };
@@ -47,7 +48,7 @@ const WordButton: React.FC<WordButtonProps> = ({
     text-xl font-bold px-2 rounded w-auto h-[75px] overflow-hidden`}
       onClick={handleClick}
     >
-      {word.toUpperCase()}
+      {wordItem.word.toUpperCase()}
     </button>
   );
 };
