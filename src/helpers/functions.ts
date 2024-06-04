@@ -50,3 +50,28 @@ export const getColorClass = (index: number) => {
       return "bg-purple";
   }
 };
+
+// Used to copy the guess results to the clipboard
+export const handleShareResults = (guesses: WordItem[][]) => {
+  let clipboardText = "Konnections\n\n";
+  guesses.forEach((guess) => {
+    guess.forEach((wordItem) => {
+      switch (wordItem.category) {
+        case YELLOW:
+          clipboardText = clipboardText.concat("🟨");
+          break;
+        case GREEN:
+          clipboardText = clipboardText.concat("🟩");
+          break;
+        case BLUE:
+          clipboardText = clipboardText.concat("🟦");
+          break;
+        case PURPLE:
+          clipboardText = clipboardText.concat("🟪");
+          break;
+      }
+    });
+    clipboardText = clipboardText.concat("\n");
+  });
+  navigator.clipboard.writeText(clipboardText.trim());
+};

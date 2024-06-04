@@ -7,8 +7,8 @@ import { shuffle, swapButtons } from "@/helpers/functions";
 import { answers, wordlist } from "@/data";
 import SolvedCategory from "@/components/SolvedCategory";
 import Modal from "@/components/Modal/Modal";
-import WinnerScreen from "@/components/Modal/WinnerScreen";
-import LoserScreen from "@/components/Modal/LoserScreen";
+import WinningScreen from "@/components/Modal/WinningScreen";
+import LosingScreen from "@/components/Modal/LosingScreen";
 import { MISTAKES_THRESHOLD } from "@/constants";
 
 export default function Home() {
@@ -30,6 +30,7 @@ export default function Home() {
 
   // Display states
   const [showLoseModal, setShowLoseModal] = useState(false);
+  const [showWinModal, setShowWinModal] = useState(false);
 
   useEffect(() => {}, [solvedAnswers]);
 
@@ -136,12 +137,17 @@ export default function Home() {
     <div className="min-h-screen flex flex-col items-center justify-center">
       {showLoseModal && (
         <Modal>
-          {}
-          <LoserScreen setShowLoseModal={setShowLoseModal} guesses={guesses} />
+          <LosingScreen
+            mistakes={mistakes}
+            setShowLoseModal={setShowLoseModal}
+            guesses={guesses}
+          />
         </Modal>
-        // <Modal>
-        //   <WinnerScreen mistakes={mistakes} guesses={guesses} />
-        // </Modal>
+      )}
+      {showWinModal && (
+        <Modal>
+          <WinningScreen mistakes={mistakes} guesses={guesses} setShowWinModal={setShowWinModal}/>
+        </Modal>
       )}
       <h1 className="text-3xl font-bold mb-3">Connections</h1>
       <div className="w-auto">

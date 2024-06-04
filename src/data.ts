@@ -1,4 +1,4 @@
-// Temporary file to store wordlist data
+// File to store any data
 
 import { BLUE, GREEN, PURPLE, YELLOW } from "./constants";
 import { AnswerItem, WordItem } from "./interfaces/interfaces";
@@ -92,3 +92,8 @@ export const answers: AnswerItem[] = [
     description: "Words related to transport",
   },
 ];
+
+export const losingScreenTitles = [
+  "Oh nyo you lost :(",
+  "Skill issue",
+]
