@@ -1,5 +1,3 @@
-"use client";
-
 import { getColorClass } from "@/helpers/functions";
 import { AnswerItem } from "@/interfaces/interfaces";
 

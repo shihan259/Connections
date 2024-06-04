@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Libre_Franklin } from "next/font/google";
 import "./globals.css";
+import { ToastProvider } from "@/contexts/ToastContext";
 
 const inter = Inter({ subsets: ["latin"] });
-
 const libre_franklin = Libre_Franklin({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={libre_franklin.className}>{children}</body>
+      <body className={libre_franklin.className}>
+        <ToastProvider>
+          {children}
+        </ToastProvider>
+      </body>
     </html>
   );
 }

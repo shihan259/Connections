@@ -1,5 +1,3 @@
-"use client";
-
 import { WordItem } from "@/interfaces/interfaces";
 import { useEffect, useState } from "react";
 

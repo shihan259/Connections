@@ -12,7 +12,9 @@ export const findWordIndexes = (
   selectedWords: WordItem[]
 ) => {
   return selectedWords
-    .map((selectedWord) => wordList.findIndex((item) => item.word === selectedWord.word))
+    .map((selectedWord) =>
+      wordList.findIndex((item) => item.word === selectedWord.word)
+    )
     .sort((a, b) => a - b);
 };
 
@@ -52,7 +54,10 @@ export const getColorClass = (index: number) => {
 };
 
 // Used to copy the guess results to the clipboard
-export const handleShareResults = (guesses: WordItem[][]) => {
+export const handleShareResults = (
+  guesses: WordItem[][],
+  showToast: (message: string, duration?: number) => void
+) => {
   let clipboardText = "Konnections\n\n";
   guesses.forEach((guess) => {
     guess.forEach((wordItem) => {
@@ -74,4 +79,5 @@ export const handleShareResults = (guesses: WordItem[][]) => {
     clipboardText = clipboardText.concat("\n");
   });
   navigator.clipboard.writeText(clipboardText.trim());
+  showToast("Results copied to clipboard!", 3000);
 };

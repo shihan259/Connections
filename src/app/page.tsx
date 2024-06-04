@@ -11,6 +11,8 @@ import WinningScreen from "@/components/Modal/WinningScreen";
 import LosingScreen from "@/components/Modal/LosingScreen";
 import { MISTAKES_THRESHOLD } from "@/constants";
 import Toast from "@/components/Toast";
+import { useToast } from "@/contexts/ToastContext";
+// import Toast from "@/components/Toast";
 
 export default function Home() {
   // Game functions
@@ -32,9 +34,9 @@ export default function Home() {
   // Display states
   const [showLoseModal, setShowLoseModal] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const { showToast } = useToast();
 
-  useEffect(() => {}, [solvedAnswers]);
+  // useEffect(() => {}, [solvedAnswers]);
 
   // Shuffle the wordlist
   const handleShuffle = () => {
@@ -62,12 +64,14 @@ export default function Home() {
           .join(",") === sortedGuess
       );
     });
-    // Add the guess to the list of guesses
-    setGuesses((prevGuesses) => [...prevGuesses, selectedWords]);
+
     if (guessed) {
-      // TODO: Show popup message for duplicate guesses
+      showToast("Already guessed!", 3000);
       return;
     }
+
+    // Add the guess to the list of guesses
+    setGuesses((prevGuesses) => [...prevGuesses, selectedWords]);
 
     // Return a category if the guess is correct
     // undefined = wrong guess, 1-4 = correct guess
@@ -143,22 +147,8 @@ export default function Home() {
     ));
   };
 
-  const showToast = (message: string) => {
-    setToastMessage(message);
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 3000); // Match duration with Toast's duration prop
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      <button
-        onClick={() => showToast("This is a toast message!")}
-        className="px-4 py-2 bg-blue text-white rounded"
-      >
-        Show Toast
-      </button>
-      {toastMessage && <Toast message={toastMessage} />}
       {showLoseModal && (
         <Modal>
           <LosingScreen

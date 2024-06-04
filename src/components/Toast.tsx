@@ -1,31 +1,46 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface ToastProps {
   message: string;
   duration?: number; // Duration in milliseconds
+  setToastMessage: (message: string | null) => void;
 }
 
-const Toast: React.FC<ToastProps> = ({ message, duration = 3000 }) => {
-  const [visible, setVisible] = useState(false);
+const Toast: React.FC<ToastProps> = ({
+  message,
+  duration = 3000,
+  setToastMessage,
+}) => {
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    setVisible(true);
+    if (message) {
+      setVisible(true);
+      // Start fade-out timer to start fadeout animation before the message is removed
+      const fadeOutTimer = setTimeout(() => {
+        setVisible(false);
+      }, duration - 500); // Start fade-out 500ms before the end
 
-    const hideToast = setTimeout(() => {
-      setVisible(false);
-    }, duration);
+      const removeMessageTimer = setTimeout(() => {
+        setToastMessage(null);
+      }, duration);
 
-    return () => clearTimeout(hideToast);
-  }, [message, duration]);
+      return () => {
+        clearTimeout(fadeOutTimer);
+        clearTimeout(removeMessageTimer);
+      };
+    }
+  }, [message, duration, setToastMessage]);
 
   return (
-    <div
-      className={`${
-        visible ? "animate-fadeIn" : "animate-fadeOut"
-      } bg-black text-white fixed bottom-5 right-5 px-4 py-2 rounded shadow-lg
-        `}
-    >
-      {message}
+    <div className="flex items-center justify-center">
+      <div
+        className={`${
+          visible ? "animate-fadeIn" : "animate-fadeOut"
+        } bg-black bottom-5 items-center flex text-sm font-bold text-white fixed px-4 py-2 rounded shadow-lg`}
+      >
+        {message}
+      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useState } from "react";
 import GuessResult from "./GuessResult";
 import { handleShareResults } from "@/helpers/functions";
 import { losingScreenTitles } from "@/data";
+import { useToast } from "@/contexts/ToastContext";
 
 interface LosingScreenProps {
   mistakes: number;
@@ -16,6 +17,7 @@ const LosingScreen: React.FC<LosingScreenProps> = ({
   setShowLoseModal,
 }) => {
   const [showGuesses, setShowGuesses] = useState(false);
+  const { showToast } = useToast();
 
   // Display random title for losses
   const title = losingScreenTitles[Math.floor(Math.random() * losingScreenTitles.length)];
@@ -35,7 +37,7 @@ const LosingScreen: React.FC<LosingScreenProps> = ({
       <div className="flex flex-row  flex-grow items-center justify-end w-full">
         <div className="flex flex-wrap gap-3 justify-center w-full">
           <button className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full w-48 hover:bg-gray-100"
-          onClick={() => handleShareResults(guesses)}>
+          onClick={() => handleShareResults(guesses, showToast)}>
             Share results
           </button>
           <button

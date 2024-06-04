@@ -1,6 +1,7 @@
 import { WordItem } from "@/interfaces/interfaces";
 import GuessResult from "./GuessResult";
 import { handleShareResults } from "@/helpers/functions";
+import { useToast } from "@/contexts/ToastContext";
 
 interface WinningScreenProps {
   mistakes: number;
@@ -13,6 +14,7 @@ const WinningScreen: React.FC<WinningScreenProps> = ({
   guesses,
   setShowWinModal,
 }) => {
+  const { showToast } = useToast();
   const title = mistakes == 0 ? "Perfect!" : "Congratulations!";
 
   return <div className="flex flex-col items-center space-y-4">
@@ -23,7 +25,7 @@ const WinningScreen: React.FC<WinningScreenProps> = ({
       <div className="flex flex-wrap gap-3 justify-center w-full">
         <button
           className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full w-48 hover:bg-gray-100"
-          onClick={() => handleShareResults(guesses)}
+          onClick={() => handleShareResults(guesses, showToast)}
         >
           Share results
         </button>
