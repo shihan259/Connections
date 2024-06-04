@@ -36,3 +36,17 @@ export const swapButtons = (
 
   return swappedList;
 };
+
+// Covert category index to color class
+export const getColorClass = (index: number) => {
+  switch (index) {
+    case YELLOW:
+      return "bg-yellow";
+    case GREEN:
+      return "bg-green";
+    case BLUE:
+      return "bg-blue";
+    case PURPLE:
+      return "bg-purple";
+  }
+};

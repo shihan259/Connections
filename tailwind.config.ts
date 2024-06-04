@@ -40,5 +40,12 @@ const config: Config = {
     },
   },
   plugins: [],
+  // Ensure that the classes can render dynamically
+  safelist: [
+    'bg-yellow',
+    'bg-green',
+    'bg-blue',
+    'bg-purple',
+  ]
 };
 export default config;

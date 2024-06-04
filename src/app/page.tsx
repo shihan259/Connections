@@ -9,17 +9,17 @@ import SolvedCategory from "@/components/SolvedCategory";
 import Modal from "@/components/Modal/Modal";
 import WinnerScreen from "@/components/Modal/WinnerScreen";
 import LoserScreen from "@/components/Modal/LoserScreen";
+import { MISTAKES_THRESHOLD } from "@/constants";
 
 export default function Home() {
-  // Store selected words
+  // Game functions
+  const [mistakes, setMistakes] = useState(0);
   const [selectedWords, setSelectedWords] = useState([] as WordItem[]);
-  // Store updated word list based
+  // Store updated word list displaying user's word selections
   const [currentWordList, setCurrentWordList] = useState(wordlist);
   // Store answers that are solved
   const [solvedAnswers, setSolvedAnswers] = useState([] as AnswerItem[]);
-  // Store mistakes made
-  const [mistakes, setMistakes] = useState(0);
-  // Store individual guesses, it is a nested string array
+  // Store individual guesses made by the user
   const [guesses, setGuesses] = useState([] as WordItem[][]);
 
   // Animations
@@ -27,6 +27,9 @@ export default function Home() {
   const [shake, setShake] = useState(false);
   // State to control popout animation
   const [popOut, setPopOut] = useState(false);
+
+  // Display states
+  const [showLoseModal, setShowLoseModal] = useState(false);
 
   useEffect(() => {}, [solvedAnswers]);
 
@@ -47,6 +50,7 @@ export default function Home() {
       .map((selectedWord) => selectedWord.word)
       .sort()
       .join(",");
+
     const guessed = guesses.some((existingGuess) => {
       return (
         existingGuess
@@ -55,7 +59,7 @@ export default function Home() {
           .join(",") === sortedGuess
       );
     });
-
+    console.log(guesses);
     // Add the guess to the list of guesses
     setGuesses((prevGuesses) => [...prevGuesses, selectedWords]);
     if (guessed) {
@@ -89,9 +93,19 @@ export default function Home() {
       // Handle wrong guess
       // Shake selected WordButtons
       setShake(true);
-      setTimeout(() => setShake(false), 500); // Remove the shake class after the animation duration
-      // Increment mistakes
-      setMistakes(mistakes + 1);
+      setTimeout(() => {
+        setShake(false);
+        // Increment mistakes after timeout to allow the shake animation to finish
+        setMistakes((prevMistakes) => {
+          const newMistake = mistakes + 1;
+          // Show modal when it reaches threshold only once
+          // Call inside setMistakes to ensure that the state is updated first
+          if (newMistake == MISTAKES_THRESHOLD) {
+            setShowLoseModal(true);
+          }
+          return newMistake;
+        });
+      }, 500); // Remove the shake class after the animation duration
     }
   };
 
@@ -120,9 +134,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      {mistakes >= 4 && (
+      {showLoseModal && (
         <Modal>
-          <LoserScreen />
+          {}
+          <LoserScreen setShowLoseModal={setShowLoseModal} guesses={guesses} />
         </Modal>
         // <Modal>
         //   <WinnerScreen mistakes={mistakes} guesses={guesses} />
@@ -138,13 +153,13 @@ export default function Home() {
       <div className="py-2">Mistakes made: {mistakes}</div>
       <div className="flex space-x-5">
         <button
-          className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full"
+          className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full hover:bg-gray-100"
           onClick={handleShuffle}
         >
           Shuffle
         </button>
         <button
-          className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full"
+          className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full hover:bg-gray-100"
           onClick={handleDeselect}
         >
           Deselect all
@@ -152,9 +167,10 @@ export default function Home() {
         <button
           className={`${
             selectedWords.length < 4
-              ? "bg-white text-black"
+              ? "bg-white text-gray-400 border border-gray-400"
               : "bg-black text-white"
-          } font-bold py-3 px-5 border border-black rounded-full`}
+          } font-bold py-3 px-5 rounded-full`}
+          disabled={selectedWords.length < 4}
           onClick={handleSubmit}
         >
           Submit

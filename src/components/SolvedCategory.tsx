@@ -1,5 +1,6 @@
 // import { colorClass } from "@/helpers/functions";
 import { BLUE, GREEN, PURPLE, YELLOW } from "@/constants";
+import { getColorClass } from "@/helpers/functions";
 import { AnswerItem } from "@/interfaces/interfaces";
 
 interface SolvedCategoryProps {
@@ -7,19 +8,6 @@ interface SolvedCategoryProps {
   answerItem: AnswerItem;
 }
 
-// Function is here because of safelisting on tailwind doesn't allow export functions
-const getColorClass = (index: number) => {
-  switch (index) {
-    case YELLOW:
-      return "bg-yellow";
-    case GREEN:
-      return "bg-green";
-    case BLUE:
-      return "bg-blue";
-    case PURPLE:
-      return "bg-purple";
-  }
-};
 
 const SolvedCategory: React.FC<SolvedCategoryProps> = ({
   category,
