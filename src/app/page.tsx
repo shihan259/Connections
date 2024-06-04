@@ -10,6 +10,7 @@ import Modal from "@/components/Modal/Modal";
 import WinningScreen from "@/components/Modal/WinningScreen";
 import LosingScreen from "@/components/Modal/LosingScreen";
 import { MISTAKES_THRESHOLD } from "@/constants";
+import Toast from "@/components/Toast";
 
 export default function Home() {
   // Game functions
@@ -31,6 +32,7 @@ export default function Home() {
   // Display states
   const [showLoseModal, setShowLoseModal] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {}, [solvedAnswers]);
 
@@ -60,7 +62,6 @@ export default function Home() {
           .join(",") === sortedGuess
       );
     });
-    console.log(guesses);
     // Add the guess to the list of guesses
     setGuesses((prevGuesses) => [...prevGuesses, selectedWords]);
     if (guessed) {
@@ -88,8 +89,17 @@ export default function Home() {
         // Remove the guessed words from the current word list
         setCurrentWordList((prevList) => prevList.slice(4));
         // Add to solved categories
-        setSolvedAnswers((prevAnswers) => [...prevAnswers, foundCategory]);
-      }, 500);
+        setSolvedAnswers((prevAnswers) => {
+          const newAnswers = [...prevAnswers, foundCategory];
+
+          if (newAnswers.length === 4) {
+            setTimeout(() => {
+              setShowWinModal(true);
+            }, 800);
+          }
+          return newAnswers;
+        });
+      }, 400);
     } else {
       // Handle wrong guess
       // Shake selected WordButtons
@@ -98,7 +108,7 @@ export default function Home() {
         setShake(false);
         // Increment mistakes after timeout to allow the shake animation to finish
         setMistakes((prevMistakes) => {
-          const newMistake = mistakes + 1;
+          const newMistake = prevMistakes + 1;
           // Show modal when it reaches threshold only once
           // Call inside setMistakes to ensure that the state is updated first
           if (newMistake == MISTAKES_THRESHOLD) {
@@ -133,8 +143,22 @@ export default function Home() {
     ));
   };
 
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3000); // Match duration with Toast's duration prop
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
+      <button
+        onClick={() => showToast("This is a toast message!")}
+        className="px-4 py-2 bg-blue text-white rounded"
+      >
+        Show Toast
+      </button>
+      {toastMessage && <Toast message={toastMessage} />}
       {showLoseModal && (
         <Modal>
           <LosingScreen
@@ -146,7 +170,11 @@ export default function Home() {
       )}
       {showWinModal && (
         <Modal>
-          <WinningScreen mistakes={mistakes} guesses={guesses} setShowWinModal={setShowWinModal}/>
+          <WinningScreen
+            mistakes={mistakes}
+            guesses={guesses}
+            setShowWinModal={setShowWinModal}
+          />
         </Modal>
       )}
       <h1 className="text-3xl font-bold mb-3">Connections</h1>

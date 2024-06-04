@@ -94,6 +94,14 @@ export const answers: AnswerItem[] = [
 ];
 
 export const losingScreenTitles = [
-  "Oh nyo you lost :(",
-  "Skill issue",
+  "Skill issue", // 0 solved categories
+  "womp womp", // 1 solved category
+  "oh nyoo 😿" // 2 solved categories 
+]
+
+export const winningScreenTitles = [
+  "Clutched it bro 😎", // 3 mistakes
+  "Slay sister 💅🏻", // 2 mistakes
+  "Solid bird bird", // 1 mistakes
+  "It's morbin time! 🤓" // 0 mistakes
 ]

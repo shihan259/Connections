@@ -1,5 +1,5 @@
-// import { colorClass } from "@/helpers/functions";
-import { BLUE, GREEN, PURPLE, YELLOW } from "@/constants";
+"use client";
+
 import { getColorClass } from "@/helpers/functions";
 import { AnswerItem } from "@/interfaces/interfaces";
 

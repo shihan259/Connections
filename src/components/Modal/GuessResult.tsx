@@ -6,7 +6,7 @@ interface GuessResultProps {
 }
 
 const GuessResult: React.FC<GuessResultProps> = ({ guesses }) => {
-  return <div className="grid grid-cols-4 gap-x-1 gap-y-3 w-auto overflow-auto">
+  return <div className="grid grid-cols-4 gap-x-1 gap-y-2 w-auto overflow-auto">
     {guesses.map((guess, index) => (
         guess.map((wordItem, index) => (
           <div key={index} className={`${getColorClass(wordItem.category)} rounded w-10 h-10`}>
