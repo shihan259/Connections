@@ -194,4 +194,5 @@ export const winningScreenTitles = [
   ["Slay sister 💅🏻", "Solid bird bird"], // 1 mistake
   ["Gottem", "Noice", "Swee"], // 2 mistakes
   ["Clutched it bro 😎", "Heng arh"], // 3 mistakes
+  ["Congratulations!"] // 4 or more mistakes
 ];

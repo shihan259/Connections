@@ -212,6 +212,7 @@ export default function Home() {
       {showLoseModal && (
         <Modal>
           <LosingScreen
+            noOfSolves={solvedAnswers.length}
             mistakes={mistakes}
             setShowLoseModal={setShowLoseModal}
             guesses={guesses}

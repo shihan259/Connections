@@ -6,12 +6,14 @@ import { losingScreenTitles } from "@/data";
 import { useToast } from "@/contexts/ToastContext";
 
 interface LosingScreenProps {
+  noOfSolves: number;
   mistakes: number;
   guesses: WordItem[][];
   setShowLoseModal: (showModal: boolean) => void;
 }
 
 const LosingScreen: React.FC<LosingScreenProps> = ({
+  noOfSolves,
   mistakes,
   guesses,
   setShowLoseModal,
@@ -20,11 +22,14 @@ const LosingScreen: React.FC<LosingScreenProps> = ({
   const { showToast } = useToast();
 
   // Display random title for losses
-  const title = losingScreenTitles[Math.floor(Math.random() * losingScreenTitles.length)];
+  const getRandomTitle = () => {
+    const titles = losingScreenTitles[noOfSolves];
+    return titles[Math.floor(Math.random() * titles.length)];
+  }
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      <h2 className="text-3xl font-bold text-center">{title}</h2>
+      <h2 className="text-3xl font-bold text-center">{getRandomTitle()}</h2>
       <button
         className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full"
         onClick={() => setShowGuesses(!showGuesses)}
