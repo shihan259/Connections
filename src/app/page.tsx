@@ -46,7 +46,6 @@ export default function Home() {
   };
 
   const correctGuessEvent = (answer: AnswerItem, givenUp: boolean = false) => {
-    console.log(currentWordList);
     // Move buttons to the next row
     const swappedList = swapButtons(currentWordList, selectedWords);
     // Set the new word list
@@ -60,7 +59,6 @@ export default function Home() {
       // Update currentWordList after the pop-out animation
       setCurrentWordList((prevList) => {
         const updatedList = prevList.slice(4);
-        console.log(updatedList); // Log the updated value here
         return updatedList;
       });
       // Add to solved categories
@@ -75,7 +73,6 @@ export default function Home() {
         }
         return newAnswers;
       });
-      
     }, 400);
   };
 
@@ -179,24 +176,27 @@ export default function Home() {
   const handleGiveUp = async () => {
     // Show all the answers
     const currentSolves = solvedAnswers.map((answer) => answer.category);
-  
+
     // Get unsolved categories
     const unsolvedCategories = CATEGORIES_ARR.filter(
       (category) => !currentSolves.includes(category)
     );
-  
+
     for (const category of unsolvedCategories) {
       // Find the words for the category
       const categoryWordList = currentWordList.filter(
         (wordItem) => wordItem.category === category
       );
-  
+
       const foundCategory = answers.find(
         (answerItem) =>
           answerItem.answer.sort().join(",") ===
-          categoryWordList.map((wordItem) => wordItem.word).sort().join(",")
+          categoryWordList
+            .map((wordItem) => wordItem.word)
+            .sort()
+            .join(",")
       );
-  
+
       // Trigger onclick effect for submitting
       if (foundCategory) {
         setSelectedWords(categoryWordList);
@@ -229,45 +229,47 @@ export default function Home() {
         </Modal>
       )}
       <h1 className="text-3xl font-bold mb-3">Konnections</h1>
-      <div className="w-auto">
+      <div className="w-auto px-2">
         {renderSolvedCategories()}
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-2 w-[100%]">
           {renderWordButtons()}
         </div>
       </div>
       <div className="py-2">Mistakes made: {mistakes}</div>
-      <div className="flex space-x-5">
-        {mistakes >= 4 && (
+      <div className="w-full overflow-hidden">
+        <div className="flex items-center gap-2 justify-center flex-wrap overflow-x-auto">
+          {mistakes >= 4 && (
+            <button
+              className="bg-red-500 text-white font-bold py-3 px-5 rounded-full hover:bg-red-600"
+              onClick={handleGiveUp}
+            >
+              Give up
+            </button>
+          )}
           <button
-            className="bg-red-500 text-white font-bold py-3 px-5 rounded-full hover:bg-red-600"
-            onClick={handleGiveUp}
+            className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full hover:bg-gray-100"
+            onClick={handleShuffle}
           >
-            Give up
+            Shuffle
           </button>
-        )}
-        <button
-          className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full hover:bg-gray-100"
-          onClick={handleShuffle}
-        >
-          Shuffle
-        </button>
-        <button
-          className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full hover:bg-gray-100"
-          onClick={handleDeselect}
-        >
-          Deselect all
-        </button>
-        <button
-          className={`${
-            selectedWords.length < 4
-              ? "bg-white text-gray-400 border border-gray-400"
-              : "bg-black text-white"
-          } font-bold py-3 px-5 rounded-full`}
-          disabled={selectedWords.length < 4}
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
+          <button
+            className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full hover:bg-gray-100"
+            onClick={handleDeselect}
+          >
+            Deselect all
+          </button>
+          <button
+            className={`${
+              selectedWords.length < 4
+                ? "bg-white text-gray-400 border border-gray-400"
+                : "bg-black text-white"
+            } font-bold py-3 px-5 rounded-full`}
+            disabled={selectedWords.length < 4}
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </div>
       <div className="py-2">Brought to you by BukitBatokTimes</div>
     </div>

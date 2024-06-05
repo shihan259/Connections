@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: { max: "520px" },
+      },
+      fontSize: {
+        'scale': "calc(0.2rem + 2vw)"
+      },
       colors: {
         green: "#A0C35A",
         blue: "#B0C4EF",
@@ -33,19 +39,19 @@ const config: Config = {
           "100%": { transform: "scale(1)" },
         },
         fadeIn: {
-          "0%": { opacity: '0' },
-          "100%": { opacity: '1' },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
         fadeOut: {
-          "0%": { opacity: '1' },
-          "100%": { opacity: '0' },
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
         },
       },
       animation: {
         shake: "shake 0.5s ease-in-out",
         popOut: "popOut 0.5s ease-in-out",
-        fadeIn: 'fadeIn 0.5s ease-in-out',
-        fadeOut: 'fadeOut 0.5s ease-in-out',
+        fadeIn: "fadeIn 0.5s ease-in-out",
+        fadeOut: "fadeOut 0.5s ease-in-out",
       },
     },
   },

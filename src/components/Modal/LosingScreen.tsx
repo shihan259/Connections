@@ -45,7 +45,7 @@ const LosingScreen: React.FC<LosingScreenProps> = ({
       {showGuesses && <GuessResult guesses={guesses} />}
 
       <p className="font-bold">Mistakes made: {mistakes}</p>
-      <div className="flex flex-row  flex-grow items-center justify-end w-full">
+      <div className="flex flex-row flex-grow items-center justify-end w-full">
         <div className="flex flex-wrap gap-3 justify-center w-full">
           <button
             className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full w-48 hover:bg-gray-100"

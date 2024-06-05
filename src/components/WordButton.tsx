@@ -23,18 +23,8 @@ const WordButton: React.FC<WordButtonProps> = ({
     setIsActive(
       selectedWords.some((selectedWord) => selectedWord.word === wordItem.word)
     );
-  }, [selectedWords, wordItem]);
 
-  const calculateFontSize = (text: string) => {
-    console.log(text.length);
-    if (text.length < 5) {
-      return "text-base"; // Default font size
-    } else if (text.length < 8) {
-      return "text-sm";
-    } else {
-      return "text-xs";
-    }
-  };
+  }, [selectedWords, wordItem]);
 
   const handleClick = () => {
     // Check if max number of words are selected already
@@ -63,8 +53,7 @@ const WordButton: React.FC<WordButtonProps> = ({
     ${isActive ? "bg-wordButtonActive text-white" : "bg-wordButton text-black"}
     ${shake && isActive ? "animate-shake" : ""}
     ${popOut && isActive ? "animate-popOut" : ""}
-    ${calculateFontSize(wordItem.word)}
-    font-bold px-2 rounded w-auto h-[75px] overflow-hidden`}
+    xs:text-scale text-lg font-bold px-2 rounded w-auto min-h-[75px] sm:min-w-[150px] overflow-hidden`}
       onClick={handleClick}
     >
       {wordItem.word.toUpperCase()}
