@@ -20,18 +20,38 @@ const WordButton: React.FC<WordButtonProps> = ({
 
   useEffect(() => {
     // Check if the word is selected
-    setIsActive(selectedWords.some((selectedWord) => selectedWord.word === wordItem.word));
+    setIsActive(
+      selectedWords.some((selectedWord) => selectedWord.word === wordItem.word)
+    );
   }, [selectedWords, wordItem]);
+
+  const calculateFontSize = (text: string) => {
+    console.log(text.length);
+    if (text.length < 5) {
+      return "text-base"; // Default font size
+    } else if (text.length < 8) {
+      return "text-sm";
+    } else {
+      return "text-xs";
+    }
+  };
 
   const handleClick = () => {
     // Check if max number of words are selected already
-    if (selectedWords.length >= 4 && !selectedWords.some((selectedWord) => selectedWord.word === wordItem.word)) {
+    if (
+      selectedWords.length >= 4 &&
+      !selectedWords.some((selectedWord) => selectedWord.word === wordItem.word)
+    ) {
       return;
     }
 
     // Toggle selection state of the word
-    const updatedSelectedWords = selectedWords.some((selectedWord) => selectedWord.word === wordItem.word)
-      ? selectedWords.filter((selectedWord) => selectedWord.word !== wordItem.word)
+    const updatedSelectedWords = selectedWords.some(
+      (selectedWord) => selectedWord.word === wordItem.word
+    )
+      ? selectedWords.filter(
+          (selectedWord) => selectedWord.word !== wordItem.word
+        )
       : [...selectedWords, wordItem];
 
     setSelectedWords(updatedSelectedWords);
@@ -43,7 +63,8 @@ const WordButton: React.FC<WordButtonProps> = ({
     ${isActive ? "bg-wordButtonActive text-white" : "bg-wordButton text-black"}
     ${shake && isActive ? "animate-shake" : ""}
     ${popOut && isActive ? "animate-popOut" : ""}
-    text-xl font-bold px-2 rounded w-auto h-[75px] overflow-hidden`}
+    ${calculateFontSize(wordItem.word)}
+    font-bold px-2 rounded w-auto h-[75px] overflow-hidden`}
       onClick={handleClick}
     >
       {wordItem.word.toUpperCase()}

@@ -228,10 +228,10 @@ export default function Home() {
           />
         </Modal>
       )}
-      <h1 className="text-3xl font-bold mb-3">Connections</h1>
+      <h1 className="text-3xl font-bold mb-3">Konnections</h1>
       <div className="w-auto">
         {renderSolvedCategories()}
-        <div className="grid grid-cols-4 gap-2 w-auto">
+        <div className="grid grid-cols-4 gap-2">
           {renderWordButtons()}
         </div>
       </div>
