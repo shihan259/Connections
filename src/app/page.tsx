@@ -3,16 +3,14 @@
 import WordButton from "../components/WordButton";
 import { useEffect, useState } from "react";
 import { AnswerItem, WordItem } from "@/interfaces/interfaces";
-import { shuffle, swapButtons } from "@/helpers/functions";
+import { shuffle, timeout, swapButtons } from "@/helpers/functions";
 import { answers, wordlist } from "@/data";
 import SolvedCategory from "@/components/SolvedCategory";
 import Modal from "@/components/Modal/Modal";
 import WinningScreen from "@/components/Modal/WinningScreen";
 import LosingScreen from "@/components/Modal/LosingScreen";
-import { MISTAKES_THRESHOLD } from "@/constants";
-import Toast from "@/components/Toast";
+import { CATEGORIES_ARR, MISTAKES_THRESHOLD } from "@/constants";
 import { useToast } from "@/contexts/ToastContext";
-// import Toast from "@/components/Toast";
 
 export default function Home() {
   // Game functions
@@ -36,8 +34,6 @@ export default function Home() {
   const [showWinModal, setShowWinModal] = useState(false);
   const { showToast } = useToast();
 
-  // useEffect(() => {}, [solvedAnswers]);
-
   // Shuffle the wordlist
   const handleShuffle = () => {
     const shuffledList = shuffle([...currentWordList]);
@@ -49,13 +45,48 @@ export default function Home() {
     setSelectedWords([]);
   };
 
+  const correctGuessEvent = (answer: AnswerItem, givenUp: boolean = false) => {
+    console.log(currentWordList);
+    // Move buttons to the next row
+    const swappedList = swapButtons(currentWordList, selectedWords);
+    // Set the new word list
+    setCurrentWordList(swappedList);
+    // Popout the selected buttons
+    setPopOut(true);
+
+    setTimeout(() => {
+      setPopOut(false);
+      setSelectedWords([]);
+      // Update currentWordList after the pop-out animation
+      setCurrentWordList((prevList) => {
+        const updatedList = prevList.slice(4);
+        console.log(updatedList); // Log the updated value here
+        return updatedList;
+      });
+      // Add to solved categories
+      setSolvedAnswers((prevAnswers) => {
+        const newAnswers = [...prevAnswers, answer];
+
+        // Do not trigger win modal if given up
+        if (newAnswers.length === 4 && !givenUp) {
+          setTimeout(() => {
+            setShowWinModal(true);
+          }, 800);
+        }
+        return newAnswers;
+      });
+      
+    }, 400);
+  };
+
   const handleSubmit = () => {
-    // Handle duplicate guesses
+    // Sort selected words for comparison
     const sortedGuess = selectedWords
       .map((selectedWord) => selectedWord.word)
       .sort()
       .join(",");
 
+    // Handle duplicate guesses
     const guessed = guesses.some((existingGuess) => {
       return (
         existingGuess
@@ -81,31 +112,13 @@ export default function Home() {
 
     // Handle correct category guess
     if (foundCategory) {
-      // Move buttons to the next row
-      const swappedList = swapButtons(currentWordList, selectedWords);
-      // Set the new word list
-      setCurrentWordList(swappedList);
-      // Popout the selected buttons
-      setPopOut(true);
-      setTimeout(() => {
-        setPopOut(false);
-        setSelectedWords([]);
-        // Remove the guessed words from the current word list
-        setCurrentWordList((prevList) => prevList.slice(4));
-        // Add to solved categories
-        setSolvedAnswers((prevAnswers) => {
-          const newAnswers = [...prevAnswers, foundCategory];
-
-          if (newAnswers.length === 4) {
-            setTimeout(() => {
-              setShowWinModal(true);
-            }, 800);
-          }
-          return newAnswers;
-        });
-      }, 400);
+      correctGuessEvent(foundCategory);
     } else {
       // Handle wrong guess
+      if (detectOneAway(selectedWords)) {
+        showToast("One away...", 3000);
+      }
+
       // Shake selected WordButtons
       setShake(true);
       setTimeout(() => {
@@ -122,6 +135,22 @@ export default function Home() {
         });
       }, 500); // Remove the shake class after the animation duration
     }
+  };
+
+  // Detect if guess is one away from a correct answer
+  const detectOneAway = (selectedWords: WordItem[]) => {
+    const frequencyCounter: { [key: number]: number } = {};
+
+    // Get the selected words
+    const categories = selectedWords.map((word) => word.category);
+
+    // Count number of ocurrences of each category
+    for (const num of categories) {
+      frequencyCounter[num] = (frequencyCounter[num] || 0) + 1;
+    }
+
+    // Check if there is a category with 3 ocurrences
+    return Object.values(frequencyCounter).some((count) => count === 3);
   };
 
   const renderSolvedCategories = () => {
@@ -145,6 +174,37 @@ export default function Home() {
         popOut={popOut}
       ></WordButton>
     ));
+  };
+
+  const handleGiveUp = async () => {
+    // Show all the answers
+    const currentSolves = solvedAnswers.map((answer) => answer.category);
+  
+    // Get unsolved categories
+    const unsolvedCategories = CATEGORIES_ARR.filter(
+      (category) => !currentSolves.includes(category)
+    );
+  
+    for (const category of unsolvedCategories) {
+      // Find the words for the category
+      const categoryWordList = currentWordList.filter(
+        (wordItem) => wordItem.category === category
+      );
+  
+      const foundCategory = answers.find(
+        (answerItem) =>
+          answerItem.answer.sort().join(",") ===
+          categoryWordList.map((wordItem) => wordItem.word).sort().join(",")
+      );
+  
+      // Trigger onclick effect for submitting
+      if (foundCategory) {
+        setSelectedWords(categoryWordList);
+        correctGuessEvent(foundCategory, true);
+        // Wait for 1 second before processing the next category (using async/await)
+        // await timeout(1000);
+      }
+    }
   };
 
   return (
@@ -176,6 +236,14 @@ export default function Home() {
       </div>
       <div className="py-2">Mistakes made: {mistakes}</div>
       <div className="flex space-x-5">
+        {mistakes >= 4 && (
+          <button
+            className="bg-red-500 text-white font-bold py-3 px-5 rounded-full hover:bg-red-600"
+            onClick={handleGiveUp}
+          >
+            Give up
+          </button>
+        )}
         <button
           className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full hover:bg-gray-100"
           onClick={handleShuffle}

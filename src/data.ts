@@ -3,7 +3,97 @@
 import { BLUE, GREEN, PURPLE, YELLOW } from "./constants";
 import { AnswerItem, WordItem } from "./interfaces/interfaces";
 
+export const answers: AnswerItem[] = [
+  {
+    answer: ["Fold", "Concede", "Surrender", "Yield"],
+    category: YELLOW,
+    description: "To give up",
+  },
+  {
+    answer: ["Ruby", "Java", "Python", "Swift"],
+    category: GREEN,
+    description: "Computer Programming Languages",
+  },
+  {
+    answer: ["Love", "Ace", "Deuce", "Rally"],
+    category: BLUE,
+    description: "Tennis Terminologies",
+  },
+  {
+    answer: ["Racecar", "Deified", "Noon", "Rotor"],
+    category: PURPLE,
+    description: "Palindromes",
+  },
+];
+
 export const wordlist: WordItem[] = [
+  {
+    word: "Racecar",
+    category: PURPLE,
+  },
+  {
+    word: "Rally",
+    category: BLUE,
+  },
+  {
+    word: "Fold",
+    category: YELLOW,
+  },
+  {
+    word: "Ruby",
+    category: GREEN,
+  },
+  {
+    word: "Rotor",
+    category: PURPLE,
+  },
+  {
+    word: "Deified",
+    category: PURPLE,
+  },
+  {
+    word: "Ace",
+    category: BLUE,
+  },
+  {
+    word: "Concede",
+    category: YELLOW,
+  },
+  {
+    word: "Python",
+    category: GREEN,
+  },
+  {
+    word: "Love",
+    category: BLUE,
+  },
+  {
+    word: "Java",
+    category: GREEN,
+  },
+  {
+    word: "Surrender",
+    category: YELLOW,
+  },
+  {
+    word: "Deuce",
+    category: BLUE,
+  },
+  {
+    word: "Swift",
+    category: GREEN,
+  },
+  {
+    word: "Yield",
+    category: YELLOW,
+  },
+  {
+    word: "Noon",
+    category: PURPLE,
+  },
+];
+
+export const testWordList: WordItem[] = [
   {
     word: "Connection",
     category: YELLOW,
@@ -70,7 +160,7 @@ export const wordlist: WordItem[] = [
   },
 ];
 
-export const answers: AnswerItem[] = [
+export const testAnswers: AnswerItem[] = [
   {
     answer: ["Connection", "Network", "Link", "Bond"],
     category: YELLOW,
@@ -94,14 +184,14 @@ export const answers: AnswerItem[] = [
 ];
 
 export const losingScreenTitles = [
-  "Skill issue", // 0 solved categories
-  "womp womp", // 1 solved category
-  "oh nyoo 😿" // 2 solved categories 
-]
+  ["💀💀💀", "toh"], // 0 solved categories
+  ["Skill issue", "Rabak"], // 1 solved category
+  ["womp womp", "See you no up"], // 2 solved categories
+];
 
 export const winningScreenTitles = [
-  "Clutched it bro 😎", // 3 mistakes
-  "Slay sister 💅🏻", // 2 mistakes
-  "Solid bird bird", // 1 mistakes
-  "It's morbin time! 🤓" // 0 mistakes
-]
+  ["Hao lian lor", "Hot shit", "It's morbin time! 🤓"], // 0 mistakes
+  ["Slay sister 💅🏻", "Solid bird bird"], // 1 mistake
+  ["Gottem", "Noice", "Swee"], // 2 mistakes
+  ["Clutched it bro 😎", "Heng arh"], // 3 mistakes
+];

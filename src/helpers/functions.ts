@@ -1,6 +1,11 @@
 import { YELLOW, GREEN, BLUE, PURPLE } from "@/constants";
 import { WordItem } from "@/interfaces/interfaces";
 
+// Returns a promise to wait for a certain amount of time
+export function timeout(delay: number) {
+  return new Promise( res => setTimeout(res, delay) );
+}
+
 // Function to shuffle the array randomly
 export const shuffle = (array: WordItem[]) => {
   return array.sort(() => Math.random() - 0.5);
@@ -23,7 +28,6 @@ export const swapButtons = (
   selectedWords: WordItem[]
 ) => {
   const swappedList = [...currentWordList];
-
   const selectedIndexes = findWordIndexes(currentWordList, selectedWords);
   // Swap all button positions
   selectedIndexes.forEach((selectedIndex, currentIndex) => {
