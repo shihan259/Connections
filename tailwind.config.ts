@@ -13,6 +13,8 @@ const config: Config = {
       },
       fontSize: {
         'scale': "calc(0.2rem + 2vw)"
+        // scalesm: "calc(40% + 1vw);",
+        // scalelg: "calc(50% + 1vw);"
       },
       colors: {
         green: "#A0C35A",

@@ -1,5 +1,6 @@
+import { useEffect, useState, useRef, useCallback } from "react";
 import { WordItem } from "@/interfaces/interfaces";
-import { useEffect, useState } from "react";
+import { text } from "node:stream/consumers";
 
 interface WordButtonProps {
   wordItem: WordItem;
@@ -17,13 +18,15 @@ const WordButton: React.FC<WordButtonProps> = ({
   popOut,
 }) => {
   const [isActive, setIsActive] = useState(false);
+  const [textSizeClass, setTextSizeClass] = useState("text-lg");
+  const textElementRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     // Check if the word is selected
     setIsActive(
       selectedWords.some((selectedWord) => selectedWord.word === wordItem.word)
     );
-
   }, [selectedWords, wordItem]);
 
   const handleClick = () => {
@@ -47,16 +50,56 @@ const WordButton: React.FC<WordButtonProps> = ({
     setSelectedWords(updatedSelectedWords);
   };
 
+  const resizeButtonText = useCallback(() => {
+    const textElement = textElementRef.current;
+    if (!textElement || !textElement.parentElement) return;
+  
+    const textElementWidth = Math.floor(textElement.scrollWidth);
+    const parentElementWidth = Math.floor(textElement.parentElement.clientWidth);
+    const difference = parentElementWidth - textElementWidth;
+  
+    if (textElement.textContent === "SURRENDER") {
+      console.log(parentElementWidth, textElementWidth, difference);
+    }
+  
+    if (difference > 27) {
+      setTextSizeClass("text-lg"); // Plenty of space
+    } else if (difference < -8) {
+      setTextSizeClass("text-scale"); // Overflowing a lot
+    }
+  }, []);
+
+  useEffect(() => {
+    const buttonElement = buttonRef.current;
+    if (!buttonElement) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      resizeButtonText();
+    });
+
+    resizeObserver.observe(buttonElement);
+
+    return () => {
+      resizeObserver.unobserve(buttonElement);
+    };
+  }, [resizeButtonText]);
+
   return (
     <button
+      ref={buttonRef}
       className={`
-    ${isActive ? "bg-wordButtonActive text-white" : "bg-wordButton text-black"}
-    ${shake && isActive ? "animate-shake" : ""}
-    ${popOut && isActive ? "animate-popOut" : ""}
-    xs:text-scale text-lg font-bold px-2 rounded w-auto min-h-[75px] sm:min-w-[150px] overflow-hidden`}
+        ${
+          isActive
+            ? "bg-wordButtonActive text-white"
+            : "bg-wordButton text-black"
+        }
+        ${shake && isActive ? "animate-shake" : ""}
+        ${popOut && isActive ? "animate-popOut" : ""}
+        ${textSizeClass}
+        font-bold px-2 rounded w-auto min-h-[75px] sm:min-w-[150px] justify-center items-center overflow-hidden flex`}
       onClick={handleClick}
     >
-      {wordItem.word.toUpperCase()}
+      <span ref={textElementRef}>{wordItem.word.toUpperCase()}</span>
     </button>
   );
 };
