@@ -1,9 +1,9 @@
 "use client";
 
 import WordButton from "../components/WordButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnswerItem, WordItem } from "@/interfaces/interfaces";
-import { shuffle, timeout, swapButtons } from "@/helpers/functions";
+import { shuffle, swapButtons } from "@/helpers/functions";
 import { answers, wordlist } from "@/data";
 import SolvedCategory from "@/components/SolvedCategory";
 import Modal from "@/components/Modal/Modal";
@@ -11,6 +11,12 @@ import WinningScreen from "@/components/Modal/WinningScreen";
 import LosingScreen from "@/components/Modal/LosingScreen";
 import { CATEGORIES_ARR, MISTAKES_THRESHOLD } from "@/constants";
 import { useToast } from "@/contexts/ToastContext";
+import { Rochester } from "next/font/google";
+
+const rochester = Rochester({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Home() {
   // Game functions
@@ -228,14 +234,15 @@ export default function Home() {
           />
         </Modal>
       )}
-      <h1 className="text-3xl font-bold mb-3">Konnections</h1>
+      <h1 className="text-3xl font-bold mb-4">Konnections</h1>
+      <div className="text-base mb-3 font-bold">8th June 2024</div>
       <div className="w-auto px-2">
         {renderSolvedCategories()}
         <div className="grid grid-cols-4 gap-2 w-[100%]">
           {renderWordButtons()}
         </div>
       </div>
-      <div className="py-2">Mistakes made: {mistakes}</div>
+      <div className="py-3">Mistakes made: {mistakes}</div>
       <div className="w-full overflow-hidden">
         <div className="flex items-center gap-2 justify-center flex-wrap overflow-x-auto">
           {mistakes >= 4 && (
@@ -271,7 +278,13 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="py-2">Brought to you by BukitBatokTimes</div>
+      <div className="py-3">
+        Brought to you by
+        <span className={`${rochester.className} text-xl`}>
+          {" "}
+          KayaButterNews
+        </span>
+      </div>
     </div>
   );
 }
