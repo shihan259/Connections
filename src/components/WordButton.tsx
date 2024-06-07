@@ -58,13 +58,10 @@ const WordButton: React.FC<WordButtonProps> = ({
     const parentElementWidth = Math.floor(textElement.parentElement.clientWidth);
     const difference = parentElementWidth - textElementWidth;
   
-    if (textElement.textContent === "SURRENDER") {
-      console.log(parentElementWidth, textElementWidth, difference);
-    }
-  
     if (difference > 27) {
       setTextSizeClass("text-lg"); // Plenty of space
-    } else if (difference < -8) {
+    } 
+    else if (difference < -8) {
       setTextSizeClass("text-scale"); // Overflowing a lot
     }
   }, []);
