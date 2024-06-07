@@ -5,90 +5,90 @@ import { AnswerItem, WordItem } from "./interfaces/interfaces";
 
 export const answers: AnswerItem[] = [
   {
-    answer: ["Fold", "Concede", "Surrender", "Yield"],
+    answer: ["Bolt", "Dodge", "Elude", "Flee"],
     category: YELLOW,
-    description: "To give up",
+    description: "Escape",
   },
   {
-    answer: ["Ruby", "Java", "Python", "Swift"],
+    answer: ["Scrambled", "Fried", "Foggy", "Fuzzy"],
     category: GREEN,
-    description: "Computer Programming Languages",
+    description: "Unclear mind",
   },
   {
-    answer: ["Love", "Ace", "Deuce", "Rally"],
+    answer: ["Period", "Question", "Dash", "Slash"],
     category: BLUE,
-    description: "Tennis Terminologies",
+    description: "Punctuations",
   },
   {
-    answer: ["Racecar", "Deified", "Noon", "Rotor"],
+    answer: ["Valentine", "Benedict", "Mark", "Mary"],
     category: PURPLE,
-    description: "Palindromes",
+    description: "Catholic saints",
   },
 ];
 
 export const wordlist: WordItem[] = [
   {
-    word: "Racecar",
+    word: "Scrambled",
+    category: GREEN,
+  },
+  {
+    word: "Benedict",
     category: PURPLE,
   },
   {
-    word: "Rally",
-    category: BLUE,
-  },
-  {
-    word: "Fold",
+    word: "Bolt",
     category: YELLOW,
   },
   {
-    word: "Ruby",
-    category: GREEN,
+    word: "Dash",
+    category: BLUE,
   },
   {
-    word: "Rotor",
+    word: "Slash",
+    category: BLUE,
+  },
+  {
+    word: "Question",
+    category: BLUE,
+  },
+  {
+    word: "Valentine",
     category: PURPLE,
   },
   {
-    word: "Deified",
+    word: "Fried",
+    category: GREEN,
+  },
+  {
+    word: "Dodge",
+    category: YELLOW,
+  },
+  {
+    word: "Fuzzy",
+    category: GREEN,
+  },
+  {
+    word: "Foggy",
+    category: GREEN,
+  },
+  {
+    word: "Elude",
+    category: YELLOW,
+  },
+  {
+    word: "Period",
+    category: BLUE,
+  },
+  {
+    word: "Flee",
+    category: YELLOW,
+  },
+  {
+    word: "Mark",
     category: PURPLE,
   },
   {
-    word: "Ace",
-    category: BLUE,
-  },
-  {
-    word: "Concede",
-    category: YELLOW,
-  },
-  {
-    word: "Python",
-    category: GREEN,
-  },
-  {
-    word: "Love",
-    category: BLUE,
-  },
-  {
-    word: "Java",
-    category: GREEN,
-  },
-  {
-    word: "Surrender",
-    category: YELLOW,
-  },
-  {
-    word: "Deuce",
-    category: BLUE,
-  },
-  {
-    word: "Swift",
-    category: GREEN,
-  },
-  {
-    word: "Yield",
-    category: YELLOW,
-  },
-  {
-    word: "Noon",
+    word: "Mary",
     category: PURPLE,
   },
 ];

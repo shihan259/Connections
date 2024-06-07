@@ -58,13 +58,16 @@ const WordButton: React.FC<WordButtonProps> = ({
     const parentElementWidth = Math.floor(textElement.parentElement.clientWidth);
     const difference = parentElementWidth - textElementWidth;
   
-    if (difference > 27) {
+    if (difference > 30) {
       setTextSizeClass("text-lg"); // Plenty of space
     } 
-    else if (difference < -8) {
+    else if (difference < -5) {
       setTextSizeClass("text-scale"); // Overflowing a lot
     }
-  }, []);
+
+  // WordItem included in dependency as shuffling does not trigger a re-render of font size
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wordItem]);
 
   useEffect(() => {
     const buttonElement = buttonRef.current;
