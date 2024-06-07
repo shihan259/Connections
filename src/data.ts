@@ -190,7 +190,7 @@ export const losingScreenTitles = [
 ];
 
 export const winningScreenTitles = [
-  ["Hao lian lor", "Hot shit", "It's morbin time! 🤓"], // 0 mistakes
+  ["Hao lian lor", "Hot shit", "Bro cooked 🗣🔥🔥🔥", "Locked in. "], // 0 mistakes
   ["Slay sister 💅🏻", "Solid bird bird"], // 1 mistake
   ["Gottem", "Noice", "Swee"], // 2 mistakes
   ["Clutched it bro 😎", "Heng arh"], // 3 mistakes
