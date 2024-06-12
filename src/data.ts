@@ -5,91 +5,90 @@ import { AnswerItem, WordItem } from "./interfaces/interfaces";
 
 export const answers: AnswerItem[] = [
   {
-    answer: ["Bolt", "Dodge", "Elude", "Flee"],
+    answer: ["Fee", "Fi", "Fo", "Fum"],
     category: YELLOW,
-    description: "Escape",
+    description: "I smell the blood of an English man",
   },
   {
-    answer: ["Scrambled", "Fried", "Foggy", "Fuzzy"],
+    answer: ["Cee", "See", "Sea", "Si"],
     category: GREEN,
-    description: "Unclear mind",
+    description: "Homophones",
   },
   {
-    answer: ["Period", "Question", "Dash", "Slash"],
+    answer: ["Zap", "Boom", "Bam", "Pow"],
     category: BLUE,
-    description: "Punctuations",
+    description: "Onomatopoeias",
   },
   {
-    answer: ["Valentine", "Benedict", "Mark", "Mary"],
+    answer: ["Doe", "Ray", "Me", "Far"],
     category: PURPLE,
-    description: "Catholic saints",
+    description: "Lyrics to do-re-mi",
   },
 ];
-
 export const wordlist: WordItem[] = [
   {
-    word: "Scrambled",
+    word: "Cee",
     category: GREEN,
   },
   {
-    word: "Benedict",
-    category: PURPLE,
-  },
-  {
-    word: "Bolt",
+    word: "Fee",
     category: YELLOW,
   },
   {
-    word: "Dash",
-    category: BLUE,
-  },
-  {
-    word: "Slash",
-    category: BLUE,
-  },
-  {
-    word: "Question",
-    category: BLUE,
-  },
-  {
-    word: "Valentine",
-    category: PURPLE,
-  },
-  {
-    word: "Fried",
+    word: "Sea",
     category: GREEN,
   },
   {
-    word: "Dodge",
+    word: "Doe",
+    category: PURPLE,
+  },
+  {
+    word: "Far",
+    category: PURPLE,
+  },
+  {
+    word: "Fo",
     category: YELLOW,
   },
   {
-    word: "Fuzzy",
-    category: GREEN,
-  },
-  {
-    word: "Foggy",
-    category: GREEN,
-  },
-  {
-    word: "Elude",
-    category: YELLOW,
-  },
-  {
-    word: "Period",
+    word: "Zap",
     category: BLUE,
   },
   {
-    word: "Flee",
+    word: "Fi",
     category: YELLOW,
   },
   {
-    word: "Mark",
+    word: "Ray",
     category: PURPLE,
   },
   {
-    word: "Mary",
+    word: "See",
+    category: GREEN,
+  },
+  {
+    word: "Me",
     category: PURPLE,
+  },
+  {
+    word: "Pow",
+    category: BLUE,
+  },
+  {
+    word: "Fum",
+    category: YELLOW,
+  },
+  {
+    word: "Bam",
+    category: BLUE,
+  },
+  {
+    word: "Si",
+    category: GREEN,
+  },
+  {
+    word: "Boom",
+    category: BLUE,
   },
 ];
 
@@ -194,5 +193,5 @@ export const winningScreenTitles = [
   ["Slay sister 💅🏻", "Solid bird bird"], // 1 mistake
   ["Gottem", "Noice", "Swee"], // 2 mistakes
   ["Clutched it bro 😎", "Heng arh"], // 3 mistakes
-  ["Congratulations!"] // 4 or more mistakes
+  ["Congratulations!"], // 4 or more mistakes
 ];
