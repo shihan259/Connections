@@ -235,7 +235,7 @@ export default function Home() {
         </Modal>
       )}
       <h1 className="text-3xl font-bold mb-4">Konnections</h1>
-      <div className="text-base mb-3 font-bold">13th June 2024</div>
+      <div className="text-base mb-3 font-bold">17th June 2024</div>
       <div className="w-auto px-2">
         {renderSolvedCategories()}
         <div className="grid grid-cols-4 gap-2 w-[100%]">

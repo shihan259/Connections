@@ -5,92 +5,94 @@ import { AnswerItem, WordItem } from "./interfaces/interfaces";
 
 export const answers: AnswerItem[] = [
   {
-    answer: ["Fee", "Fi", "Fo", "Fum"],
+    answer: ["不知不觉", "不鸣则已", "不欢而散", "不白之冤"],
     category: YELLOW,
-    description: "I smell the blood of an English man",
+    description: "不字头开始的成语",
   },
   {
-    answer: ["Cee", "See", "Sea", "Si"],
+    answer: ["杯弓蛇影", "牛刀小试", "塞翁失马", "狡兔三窟"],
     category: GREEN,
-    description: "Homophones",
+    description: "有动物的成语",
   },
   {
-    answer: ["Zap", "Boom", "Bam", "Pow"],
+    answer: ["半途而废", "有始无终", "前功尽弃", "自暴自弃"],
     category: BLUE,
-    description: "Onomatopoeias",
+    description: "放弃的意思",
   },
   {
-    answer: ["Doe", "Ray", "Me", "Far"],
+    answer: ["三顾茅庐", "七擒七纵", "草船借箭", "临危受命"],
     category: PURPLE,
-    description: "Lyrics to do-re-mi",
+    description: "关于诸葛亮",
   },
 ];
+
 export const wordlist: WordItem[] = [
   {
-    word: "Cee",
+    word: "杯弓蛇影",
     category: GREEN,
   },
   {
-    word: "Fee",
+    word: "不白之冤",
     category: YELLOW,
   },
   {
-    word: "Sea",
-    category: GREEN,
-  },
-  {
-    word: "Doe",
+    word: "三顾茅庐",
     category: PURPLE,
   },
   {
-    word: "Far",
-    category: PURPLE,
-  },
-  {
-    word: "Fo",
-    category: YELLOW,
-  },
-  {
-    word: "Zap",
+    word: "自暴自弃",
     category: BLUE,
   },
   {
-    word: "Fi",
+    word: "不欢而散",
     category: YELLOW,
   },
   {
-    word: "Ray",
-    category: PURPLE,
-  },
-  {
-    word: "See",
-    category: GREEN,
-  },
-  {
-    word: "Me",
-    category: PURPLE,
-  },
-  {
-    word: "Pow",
+    word: "前功尽弃",
     category: BLUE,
   },
   {
-    word: "Fum",
+    word: "有始无终",
+    category: BLUE,
+  },
+  {
+    word: "不鸣则已",
     category: YELLOW,
   },
   {
-    word: "Bam",
-    category: BLUE,
-  },
-  {
-    word: "Si",
+    word: "狡兔三窟",
     category: GREEN,
   },
   {
-    word: "Boom",
+    word: "七擒七纵",
+    category: PURPLE,
+  },
+  {
+    word: "牛刀小试",
+    category: GREEN,
+  },
+  {
+    word: "草船借箭",
+    category: PURPLE,
+  },
+  {
+    word: "临危受命",
+    category: PURPLE,
+  },
+  {
+    word: "不知不觉",
+    category: YELLOW,
+  },
+  {
+    word: "塞翁失马",
+    category: GREEN,
+  },
+  {
+    word: "半途而废",
     category: BLUE,
   },
 ];
+
 
 export const testWordList: WordItem[] = [
   {
