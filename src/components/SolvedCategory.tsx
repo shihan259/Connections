@@ -1,4 +1,4 @@
-import { getColorClass } from "@/helpers/functions";
+import { getColorClass } from "@/utils/functions";
 import { AnswerItem } from "@/interfaces/interfaces";
 
 interface SolvedCategoryProps {

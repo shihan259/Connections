@@ -3,7 +3,7 @@
 import WordButton from "../components/WordButton";
 import { useState } from "react";
 import { AnswerItem, WordItem } from "@/interfaces/interfaces";
-import { shuffle, swapButtons } from "@/helpers/functions";
+import { shuffle, swapButtons } from "@/utils/functions";
 import { answers, wordlist } from "@/data";
 import SolvedCategory from "@/components/SolvedCategory";
 import Modal from "@/components/Modal/Modal";
