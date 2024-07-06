@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { WordItem } from "@/interfaces/interfaces";
-import { text } from "node:stream/consumers";
 
 interface WordButtonProps {
   wordItem: WordItem;

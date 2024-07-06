@@ -8,3 +8,10 @@ export interface AnswerItem {
   category: number;
   description: string;
 }
+
+export interface CategoryItem {
+  category: number;
+  title: string;
+}
+
+export type EditState = "color" | "word"
