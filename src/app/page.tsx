@@ -53,6 +53,7 @@ export default function Home() {
           .from("Puzzles")
           .select("*")
           .order("date_created", { ascending: false })
+          .limit(1)
           .single();
 
         if (error) {
