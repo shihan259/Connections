@@ -1,6 +1,6 @@
 import { WordItem } from "@/interfaces/interfaces";
 import GuessResult from "./GuessResult";
-import { handleShareResults } from "@/helpers/functions";
+import { handleShareResults } from "@/utils/functions";
 import { useToast } from "@/contexts/ToastContext";
 import { winningScreenTitles } from "@/data";
 import { useEffect, useState } from "react";

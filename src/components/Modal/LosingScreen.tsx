@@ -1,7 +1,7 @@
 import { WordItem } from "@/interfaces/interfaces";
 import { useEffect, useState } from "react";
 import GuessResult from "./GuessResult";
-import { handleShareResults } from "@/helpers/functions";
+import { handleShareResults } from "@/utils/functions";
 import { losingScreenTitles } from "@/data";
 import { useToast } from "@/contexts/ToastContext";
 import { title } from "process";

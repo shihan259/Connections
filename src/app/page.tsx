@@ -1,10 +1,9 @@
 "use client";
 
 import WordButton from "../components/WordButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnswerItem, WordItem } from "@/interfaces/interfaces";
-import { shuffle, swapButtons } from "@/helpers/functions";
-import { answers, wordlist } from "@/data";
+import { shuffle, swapButtons } from "@/utils/functions";
 import SolvedCategory from "@/components/SolvedCategory";
 import Modal from "@/components/Modal/Modal";
 import WinningScreen from "@/components/Modal/WinningScreen";
@@ -12,6 +11,8 @@ import LosingScreen from "@/components/Modal/LosingScreen";
 import { CATEGORIES_ARR, MISTAKES_THRESHOLD } from "@/constants";
 import { useToast } from "@/contexts/ToastContext";
 import { Rochester } from "next/font/google";
+import { createSupabaseClient } from "@/utils/database";
+import { format } from "date-fns";
 
 const rochester = Rochester({
   weight: "400",
@@ -23,11 +24,13 @@ export default function Home() {
   const [mistakes, setMistakes] = useState(0);
   const [selectedWords, setSelectedWords] = useState([] as WordItem[]);
   // Store updated word list displaying user's word selections
-  const [currentWordList, setCurrentWordList] = useState(wordlist);
+  const [currentWordList, setCurrentWordList] = useState([] as WordItem[]);
   // Store answers that are solved
   const [solvedAnswers, setSolvedAnswers] = useState([] as AnswerItem[]);
   // Store individual guesses made by the user
   const [guesses, setGuesses] = useState([] as WordItem[][]);
+  const [date, setDate] = useState("");
+  const [answers, setAnswers] = useState([] as AnswerItem[]);
 
   // Animations
   // State to control shaking animation
@@ -39,6 +42,36 @@ export default function Home() {
   const [showLoseModal, setShowLoseModal] = useState(false);
   const [showWinModal, setShowWinModal] = useState(false);
   const { showToast } = useToast();
+
+  const supabase = createSupabaseClient();
+
+  // Get puzzle from database
+  useEffect(() => {
+    const fetchPuzzle = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("Puzzles")
+          .select("*")
+          .order("date_created", { ascending: false })
+          .limit(1)
+          .single();
+
+        if (error) {
+          throw error;
+        }
+
+        // Set the word list and answers
+        setCurrentWordList(data.word_list);
+        setAnswers(data.answer_list);
+        const date = new Date(data.date_created);
+        setDate(format(date, "do MMMM yyyy"));
+      } catch (error) {
+        showToast("Error fetching puzzle", 3000);
+      }
+    };
+
+    fetchPuzzle();
+  }, []);
 
   // Shuffle the wordlist
   const handleShuffle = () => {
@@ -235,7 +268,7 @@ export default function Home() {
         </Modal>
       )}
       <h1 className="text-3xl font-bold mb-4">Konnections</h1>
-      <div className="text-base mb-3 font-bold">17th June 2024</div>
+      <div className="text-base mb-3 font-bold">{date}</div>
       <div className="w-auto px-2">
         {renderSolvedCategories()}
         <div className="grid grid-cols-4 gap-2 w-[100%]">

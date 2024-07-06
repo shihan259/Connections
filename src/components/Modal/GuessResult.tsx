@@ -1,4 +1,4 @@
-import { getColorClass } from "@/helpers/functions";
+import { getColorClass } from "@/utils/functions";
 import { WordItem } from "@/interfaces/interfaces";
 
 interface GuessResultProps {
