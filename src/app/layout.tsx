@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Libre_Franklin } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/contexts/ToastContext";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 const libre_franklin = Libre_Franklin({ subsets: ["latin"] });
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={libre_franklin.className}>
+        <Navbar />
         <ToastProvider>
           {children}
         </ToastProvider>
