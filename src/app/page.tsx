@@ -71,7 +71,7 @@ export default function Home() {
     };
 
     fetchPuzzle();
-  }, []);
+  });
 
   // Shuffle the wordlist
   const handleShuffle = () => {
