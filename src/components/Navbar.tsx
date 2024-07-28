@@ -5,6 +5,7 @@ import { FaRegCircleQuestion } from "react-icons/fa6";
 import Modal from "@/components/Modal/Modal";
 import { useState } from "react";
 import HowToPlayScreen from "./Modal/HowToPlayScreen";
+import Image from "next/image";
 
 const rochester = Rochester({
     weight: "400",
@@ -22,7 +23,7 @@ const Navbar = () => {
             </Modal>}
             <nav className="flex items-center justify-between flex-wrap p-2">
                 <div className="flex items-center flex-shrink-0 text-white mr-6">
-                    <img src="/logo.png" className="h-12 w-12 m-0 mr-1" alt="Logo" />
+                    <Image src="/logo.png" className="h-12 w-12 m-0 mr-1" alt="Logo" />
                     <span className={`${rochester.className} font-semibold tracking-tight text-black text-xl`}>KayaButterNews</span>
                 </div>
                 {/* <div className="block lg:hidden">

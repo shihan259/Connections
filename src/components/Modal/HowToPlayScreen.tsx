@@ -2,7 +2,6 @@ interface HowToPlayScreenProps {
     setShowModal: (showModal: boolean) => void;
 }
 
-
 const HowToPlayScreen: React.FC<HowToPlayScreenProps> = ({ setShowModal }) => {
 
     return (
@@ -26,7 +25,7 @@ const HowToPlayScreen: React.FC<HowToPlayScreenProps> = ({ setShowModal }) => {
                 <p>Ant, Drill, Island, Opal</p>
             </div>
             <p className="text-sm mt-4">
-                Categories will always be more specific than general words like "5-LETTER-WORDS," "NAMES," or "VERBS." <br /><br />
+                Categories will always be more specific than general words like &quot;5-LETTER-WORDS,&quot; &quot;NAMES,&quot; or &quot;VERBS.&quot; <br /><br />
                 You have to find all the groups without making more than 4 mistakes! <br /><br />
                 Each group will be assigned a color, which will be revealed as you solve the puzzle:
             </p>
