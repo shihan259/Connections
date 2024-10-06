@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NYTimes Connections
 
-## Getting Started
+Welcome to the **NYTimes Connections**! This project is a web-based imitation of the popular NYTimes Connections game. The goal is to offer a similar experience to the real game, but with our own puzzles added. 
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project is built using **Next.js**, a powerful React framework, and uses **Supabase** as the backend database solution.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*Note: This project is for educational and personal purposes only. All rights to the original game concept belong to **The New York Times**.*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
+- **Next.js**: For the frontend user interface.
+- **Supabase**: To handle backend operations and storing puzzles
+- **JavaScript**: For logic and interactivity.
+- **TailwindCSS**: For CSS and styling.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
+- User-friendly interface that mimics the gameplay of NYTimes Connections.
+- Supabase integration for data persistence.
+- Responsive design for seamless experience across devices.
+- Ability to view and play past puzzles uploaded to the site.
+- Ability to add puzzles through a frontend interface via ```{URL}/create```.
+- Additional features such as a "Give up" button to solve the puzzle for you.
+- Infinite tries because not all of us are good at this game.
 
-## Learn More
+## Installation and Setup
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
+Make sure you have the following installed on your local development machine:
+- **Node.js** (>= 20.x)
+- **npm** or **yarn**
+- **Supabase** account
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Steps to Install and Run
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/shihan259/Connections.git
+   cd Connections
+   ```
 
-## Deploy on Vercel
+2. **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Set up Supabase**:
+    - Create a project on Supabase.
+    - Copy your **API key** and **Database URL**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```bash
+    NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-api-key
+    ```
+4. **Run the development server**:
+    ```bash
+    npm run dev
+    ```
+
+Open http://localhost:3000 to view the application in your browser.
+
+## Credits
+
+- Original game concept by **The New York Times**.
+- Built using **Next.js** and **Supabase**.
+- Credits to **Ryan** for the unique puzzles.
+- Credits to **Cherlyn** for the logo.
+
+## Demo URL
+You can view the live version of the website here: [Connections](https://connections-weld.vercel.app/)
+You can copy and paste this directly into your README.md file starting from the Credits section! Just
