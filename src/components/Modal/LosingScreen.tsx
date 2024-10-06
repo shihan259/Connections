@@ -34,7 +34,7 @@ const LosingScreen: React.FC<LosingScreenProps> = ({
   }, [noOfSolves]);
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col items-center space-y-4 p-12 ">
       <h2 className="text-3xl font-bold text-center">{title}</h2>
       <button
         className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full"

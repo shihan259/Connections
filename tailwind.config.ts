@@ -12,9 +12,7 @@ const config: Config = {
         xs: { max: "520px" },
       },
       fontSize: {
-        'scale': "calc(0.2rem + 2vw)"
-        // scalesm: "calc(40% + 1vw);",
-        // scalelg: "calc(50% + 1vw);"
+        'scale': "calc(0.55rem + 0.5vw)",
       },
       colors: {
         green: "#A0C35A",

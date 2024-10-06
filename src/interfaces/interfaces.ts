@@ -14,4 +14,9 @@ export interface CategoryItem {
   title: string;
 }
 
+export interface Puzzle {
+  slug: string;
+  dateCreated: string;
+}
+
 export type EditState = "color" | "word"

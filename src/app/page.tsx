@@ -19,7 +19,7 @@ const rochester = Rochester({
   subsets: ["latin"],
 });
 
-export default function Home() {
+export default function Home({ slug }: { slug: string }) {
   // Game functions
   const [mistakes, setMistakes] = useState(0);
   const [selectedWords, setSelectedWords] = useState([] as WordItem[]);
@@ -49,17 +49,42 @@ export default function Home() {
   useEffect(() => {
     const fetchPuzzle = async () => {
       try {
-        const { data, error } = await supabase
-          .from("Puzzles")
-          .select("*")
-          .order("date_created", { ascending: false })
-          .limit(1)
-          .single();
+        let data = null;
+        let error = null;
+
+        if (slug) {
+          // Condition for slug, fetch puzzle by slug (past connections scenario)
+          const result = await supabase
+            .from("Puzzles")
+            .select("*")
+            .eq("slug", slug)
+            .single();
+
+          data = result.data;
+          error = result.error;
+
+          if (error) {
+            if (error.code == "PGRST116") {
+              showToast("Puzzle not found", 3000);
+              // throw error;
+              return;
+            }
+          }
+        } else {
+          // Condition for no slug, fetch latest puzzle (home page scenario)
+          const result = await supabase
+            .from("Puzzles")
+            .select("*")
+            .order("date_created", { ascending: false })
+            .limit(1)
+            .single();
+          data = result.data;
+          error = result.error;
+        }
 
         if (error) {
           throw error;
         }
-
         // Set the word list and answers
         setCurrentWordList(data.word_list);
         setAnswers(data.answer_list);
@@ -200,6 +225,7 @@ export default function Home() {
   };
 
   const renderWordButtons = () => {
+    if (!currentWordList) return null;
     return currentWordList.map((wordItem, index) => (
       <WordButton
         key={index}
@@ -247,7 +273,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="flex flex-grow flex-col items-center justify-center">
       {showLoseModal && (
         <Modal>
           <LosingScreen

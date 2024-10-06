@@ -5,7 +5,7 @@ interface HowToPlayScreenProps {
 const HowToPlayScreen: React.FC<HowToPlayScreenProps> = ({ setShowModal }) => {
 
     return (
-        <div className="flex flex-col space-y-4 w-80">
+        <div className="flex flex-col space-y-4 w-80 p-12">
             <h2 className="text-3xl font-bold text-center">How to play</h2>
 
             <p className="text-sm">

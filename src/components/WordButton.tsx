@@ -17,7 +17,7 @@ const WordButton: React.FC<WordButtonProps> = ({
   popOut,
 }) => {
   const [isActive, setIsActive] = useState(false);
-  const [textSizeClass, setTextSizeClass] = useState("text-lg");
+  const [textSizeClass, setTextSizeClass] = useState("text-scale");
   const textElementRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -49,39 +49,43 @@ const WordButton: React.FC<WordButtonProps> = ({
     setSelectedWords(updatedSelectedWords);
   };
 
-  const resizeButtonText = useCallback(() => {
-    const textElement = textElementRef.current;
-    if (!textElement || !textElement.parentElement) return;
-  
-    const textElementWidth = Math.floor(textElement.scrollWidth);
-    const parentElementWidth = Math.floor(textElement.parentElement.clientWidth);
-    const difference = parentElementWidth - textElementWidth;
-  
-    if (difference > 30) {
-      setTextSizeClass("text-lg"); // Plenty of space
-    } 
-    else if (difference < -5) {
-      setTextSizeClass("text-scale"); // Overflowing a lot
-    }
+  // This function resizes the font size based on the size of the button
+  // Used when trying to make website responsive to different screen sizes
+  // However, it is still clunky and doesn't give an aesthetic look due to the different font sizes
+  // Using text-scale right now as it is the most consistent
 
-  // WordItem included in dependency as shuffling does not trigger a re-render of font size
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wordItem]);
+  // const resizeButtonText = useCallback(() => {
+  //   const textElement = textElementRef.current;
+  //   if (!textElement || !textElement.parentElement) return;
+  
+  //   const textElementWidth = Math.floor(textElement.scrollWidth);
+  //   const parentElementWidth = Math.floor(textElement.parentElement.clientWidth);
+  //   const difference = parentElementWidth - textElementWidth;
+  
+  //   if (difference > 30) {
+  //     setTextSizeClass("text-scale-extra"); // Plenty of space
+  //   } 
+  //   else if (difference < -5) {
+  //     setTextSizeClass("text-scale"); // Overflowing a lot
+  //   }
+
+  // // WordItem included in dependency as shuffling does not trigger a re-render of font size
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [wordItem]);
 
   useEffect(() => {
     const buttonElement = buttonRef.current;
     if (!buttonElement) return;
 
-    const resizeObserver = new ResizeObserver(() => {
-      resizeButtonText();
-    });
-
-    resizeObserver.observe(buttonElement);
-
-    return () => {
-      resizeObserver.unobserve(buttonElement);
-    };
-  }, [resizeButtonText]);
+    // const resizeObserver = new ResizeObserver(() => {
+    //   resizeButtonText();
+    // });
+    // resizeObserver.observe(buttonElement);
+    // return () => {
+    //   resizeObserver.unobserve(buttonElement);
+    // };
+  }, []);
+  // }, [resizeButtonText]);
 
   return (
     <button

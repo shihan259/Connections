@@ -30,7 +30,7 @@ const WinningScreen: React.FC<WinningScreenProps> = ({
   }, [mistakes]);
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col items-center space-y-4 p-12 ">
       <h2 className="text-3xl font-bold text-center">{title}</h2>
       <GuessResult guesses={guesses} />
 
