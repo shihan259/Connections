@@ -17,7 +17,6 @@ const PastPuzzlesScreen: React.FC<PastPuzzlesScreenProps> = ({
   const router = useRouter();
   const [puzzles, setPuzzles] = useState<Puzzle[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  //   const { showToast } = useToast();
 
   useEffect(() => {
     const fetchPuzzles = async () => {
@@ -40,7 +39,7 @@ const PastPuzzlesScreen: React.FC<PastPuzzlesScreenProps> = ({
         );
         setIsLoading(false);
       } catch (error) {
-        // showToast("Error fetching puzzle", 3000);
+        // showToast("Error fetching puzzles", 3000);
       }
     };
 
@@ -49,11 +48,21 @@ const PastPuzzlesScreen: React.FC<PastPuzzlesScreenProps> = ({
     fetchPuzzles();
   }, []);
 
+  const handleOnPuzzleClick = (slug: string) => {
+    setShowModal(false);
+    router.push(`/${slug}`);
+  };
+
   return (
     <>
       {isLoading ? (
-        // Render a loader or nothing when loading
-        <p>Loading...</p> // You can customize this message or replace with a spinner
+        <div className="min-w-[40vw] min-h-[30vh] flex items-center justify-center m-auto  p-auto">
+          <div
+            className="animate-spin inline-block size-12 border-[3px] border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500"
+            role="status"
+            aria-label="loading"
+          ></div>
+        </div>
       ) : (
         <div className="flex flex-col min-w-[40vw] overflow-x-hidden">
           <div className="flex justify-between items-center">
@@ -79,7 +88,7 @@ const PastPuzzlesScreen: React.FC<PastPuzzlesScreenProps> = ({
               <li
                 key={index}
                 className="border-t border-gray-200 cursor-pointer hover:bg-gray-100"
-                onClick={() => router.push(`/${puzzle.slug}`)}
+                onClick={() => handleOnPuzzleClick(puzzle.slug)}
               >
                 <div className="px-4 py-5 sm:px-6">
                   <div className="flex items-center">
