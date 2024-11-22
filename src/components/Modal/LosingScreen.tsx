@@ -34,7 +34,7 @@ const LosingScreen: React.FC<LosingScreenProps> = ({
   }, [noOfSolves]);
 
   return (
-    <div className="flex flex-col items-center space-y-4 p-12 ">
+    <div className="flex flex-col items-center space-y-4 px-12 pt-12">
       <h2 className="text-3xl font-bold text-center">{title}</h2>
       <button
         className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full"
@@ -46,7 +46,7 @@ const LosingScreen: React.FC<LosingScreenProps> = ({
 
       <p className="font-bold">Mistakes made: {mistakes}</p>
       <div className="flex flex-row flex-grow items-center justify-end w-full">
-        <div className="flex flex-wrap gap-3 justify-center w-full">
+        <div className="flex flex-wrap gap-3 justify-center w-full pb-12">
           <button
             className="bg-white text-black font-bold py-3 px-5 border border-black rounded-full w-48 hover:bg-gray-100"
             onClick={() => handleShareResults(guesses, showToast)}
