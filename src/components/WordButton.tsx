@@ -99,7 +99,7 @@ const WordButton: React.FC<WordButtonProps> = ({
         ${shake && isActive ? "animate-shake" : ""}
         ${popOut && isActive ? "animate-popOut" : ""}
         ${textSizeClass}
-        font-bold px-2 rounded w-auto min-h-[75px] sm:min-w-[150px] justify-center items-center overflow-hidden flex`}
+        font-bold px-2 rounded min-h-[75px] min-w-[75px] w-auto justify-center items-center overflow-hidden flex`}
       onClick={handleClick}
     >
       <span ref={textElementRef}>{wordItem.word.toUpperCase()}</span>

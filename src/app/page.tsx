@@ -297,7 +297,7 @@ export default function Home({ slug }: { slug: string }) {
       <div className="text-base mb-3 font-bold">{date}</div>
       <div className="w-auto px-2">
         {renderSolvedCategories()}
-        <div className="grid grid-cols-4 gap-2 w-[100%]">
+        <div className="grid grid-cols-4 gap-2 w-full min-w-0">
           {renderWordButtons()}
         </div>
       </div>
